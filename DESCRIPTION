@@ -1,0 +1,25 @@
+Package: rSubDisc
+Title: Wrapper for the Java subgroup discovery library SubDisc
+Version: 0.0.1
+Authors@R: person("Jeremie", "Gobeil", 
+                  role = c("aut", "cre"),
+                  email = "jeremie.gobeil@gmail.com", 
+                  comment = c(ORCID = "0000-0002-8920-4127"))
+Maintainer: Jeremie Gobeil <jeremie.gobeil@gmail.com>
+Description: SubDisc is a tool which, given a dataset, performs Subgroup Discovery. 
+  This is a form of Supervised Descriptive Local Pattern Mining. For more info
+  https://github.com/SubDisc/SubDisc
+License: MIT + file LICENSE
+SystemRequirements: Java
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+LazyData: true
+Imports: 
+    rJava,
+    tibble
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Depends: 
+    R (>= 2.10)
