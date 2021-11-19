@@ -16,8 +16,8 @@
 
 #' Search a dataset for subgroup
 #'
-#' @param src
-#' @param targetColumn
+#' @param src The file to load
+#' @param targetColumn The column number to use as the target
 #' @param targetValue
 #' @param targetType
 #' @param qualityMeasure
@@ -127,8 +127,10 @@ subgroupdiscovery <- function(
     .jnull("javax.swing.JFrame")   # javax.swing.JFrame theMainWindow
   )
 
-  # Returning the results array
-  .jcall(subgroups, "Lnl/liacs/subdisc/SubgroupSet;", "getResult")
+  # Returning a tiddle
+  .subdisc.SubgroupSet.tibble(
+    .jcall(subgroups, "Lnl/liacs/subdisc/SubgroupSet;", "getResult")
+  )
 }
 
 

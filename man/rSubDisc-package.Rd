@@ -4,7 +4,7 @@
 \name{rSubDisc-package}
 \alias{rSubDisc}
 \alias{rSubDisc-package}
-\title{rSubDisc: Wrapper for Java subgroup discovery library SubDisc}
+\title{rSubDisc: Wrapper for the Java subgroup discovery library SubDisc}
 \description{
 SubDisc is a tool which, given a dataset, performs Subgroup Discovery. This is a form of Supervised Descriptive Local Pattern Mining. For more info https://github.com/SubDisc/SubDisc
 }

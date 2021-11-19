@@ -26,6 +26,10 @@ subgroupdiscovery(
 )
 }
 \arguments{
+\item{src}{The file to load}
+
+\item{targetColumn}{The column number to use as the target}
+
 \item{nrThreads}{}
 }
 \value{
