@@ -3,12 +3,6 @@
   function(name){.jfield(enumclass, paste("L", enumclass, ";", sep=""), name)}
 }
 
-# Java enum
-.subdisc.TargetType             <- .jnewEnum("nl/liacs/subdisc/TargetType")
-.subdisc.SearchStrategy         <- .jnewEnum("nl/liacs/subdisc/SearchStrategy")
-.subdisc.NumericOperatorSetting <- .jnewEnum("nl/liacs/subdisc/NumericOperatorSetting")
-.subdisc.NumericStrategy        <- .jnewEnum("nl/liacs/subdisc/NumericStrategy")
-.subdisc.QualityMeasure         <- .jnewEnum("nl/liacs/subdisc/QM")
 
 
 # General function to call a search --------------------------------------------
@@ -43,24 +37,24 @@ subgroupdiscovery <- function(
   src,
   targetColumn,
   targetValue = NULL,
-  targetType = .subdisc.TargetType("SINGLE_NOMINAL"),
-  qualityMeasure = .subdisc.QualityMeasure("CORTANA_QUALITY"),
+  targetType = "SINGLE_NOMINAL",
+  qualityMeasure = "CORTANA_QUALITY",
   qualityMeasureMinimum = NULL,
   searchDepth = NULL,
   minimumCoverage = NULL,
   maximumCoverageFraction = NULL,
   maximumSubgroups = NULL,
   maximumTime = NULL,
-  searchStrategy = .subdisc.SearchStrategy("BEAM"),
+  searchStrategy = "BEAM",
   nominalSets = NULL,
-  numericOperatorSetting = .subdisc.NumericOperatorSetting("NORMAL"),
-  numericStrategy = .subdisc.NumericStrategy("NUMERIC_BEST"),
+  numericOperatorSetting = "NORMAL",
+  numericStrategy = "NUMERIC_BEST",
   searchStrategyWidth = NULL,
   nrBins = NULL,
   nrThreads = 1
 ){
 
-  # Loading the data table ----
+  # Loading the data table ---
   # Only from file implemented
   if(is.character(src)){
     file <- .jnew("java.io.File", src)
@@ -72,7 +66,14 @@ subgroupdiscovery <- function(
     return(NULL)
   }
 
-  # Setting the target and target concept ----
+  # Java Enum ---
+  TargetType      <- .jnewEnum("nl/liacs/subdisc/TargetType")
+  SearchStrategy  <- .jnewEnum("nl/liacs/subdisc/SearchStrategy")
+  NumOpSetting    <- .jnewEnum("nl/liacs/subdisc/NumericOperatorSetting")
+  NumericStrategy <- .jnewEnum("nl/liacs/subdisc/NumericStrategy")
+  QualityMeasure  <- .jnewEnum("nl/liacs/subdisc/QM")
+
+  # Setting the target and target concept ---
   target = .jcall(dataTable,
                   "Lnl/liacs/subdisc/Column;",
                   "getColumn",
@@ -85,7 +86,7 @@ subgroupdiscovery <- function(
   }
 
   setTC( "setPrimaryTarget", target                    )
-  setTC( "setTargetType"   , targetType                )
+  setTC( "setTargetType"   , TargetType(targetType)    )
   setTC( "setTargetValue"  , targetValue, as.character )
 
 
@@ -97,17 +98,17 @@ subgroupdiscovery <- function(
   }
 
   setSP( "setTargetConcept"          , targetConcept                       )
-  setSP( "setQualityMeasure"         , qualityMeasure                      )
+  setSP( "setQualityMeasure"         , QualityMeasure(qualityMeasure)      )
   setSP( "setQualityMeasureMinimum"  , qualityMeasureMinimum  , .jfloat    )
   setSP( "setSearchDepth"            , searchDepth            , as.integer )
   setSP( "setMinimumCoverage"        , minimumCoverage        , as.integer )
   setSP( "setMaximumCoverageFraction", maximumCoverageFraction, .jfloat    )
   setSP( "setMaximumSubgroups"       , maximumSubgroups       , as.integer )
   setSP( "setMaximumTime"            , maximumTime            , .jfloat    )
-  setSP( "setSearchStrategy"         , searchStrategy                      )
+  setSP( "setSearchStrategy"         , SearchStrategy(searchStrategy)      )
   setSP( "setNominalSets"            , nominalSets                         )
-  setSP( "setNumericOperators"       , numericOperatorSetting              )
-  setSP( "setNumericStrategy"        , numericStrategy                     )
+  setSP( "setNumericOperators"       , NumOpSetting(numericOperatorSetting))
+  setSP( "setNumericStrategy"        , NumericStrategy(numericStrategy)    )
   setSP( "setSearchStrategyWidth"    , searchStrategyWidth    , as.integer )
   setSP( "setNrBins"                 , nrBins                 , as.integer )
   setSP( "setNrThreads"              , nrThreads              , as.integer )
@@ -214,10 +215,10 @@ newGetFunc <- function(getFunc, returnType){
   maximumCoverageFraction = 1.0,
   maximumSubgroups = 1000,
   maximumTime = 1000,
-  searchStrategy = .subdisc.SearchStrategy("BEAM"),
+  searchStrategy = "BEAM",
   nominalSets = FALSE,
-  numericOperatorSetting = .subdisc.NumericOperatorSetting("NORMAL"),
-  numericStrategy = .subdisc.NumericStrategy("NUMERIC_BEST"),
+  numericOperatorSetting = "NORMAL",
+  numericStrategy = "NUMERIC_BEST",
   searchStrategyWidth = 10,
   nrBins = 8,
   nrThreads = 1
@@ -226,8 +227,8 @@ newGetFunc <- function(getFunc, returnType){
     src = src,
     targetColumn = targetColumn,
     targetValue = targetValue,
-    targetType = .subdisc.TargetType("SINGLE_NOMINAL"),
-    qualityMeasure = .subdisc.QualityMeasure("CORTANA_QUALITY"),
+    targetType = "SINGLE_NOMINAL",
+    qualityMeasure = "CORTANA_QUALITY",
     qualityMeasureMinimum = qualityMeasureMinimum,
     searchDepth = searchDepth,
     minimumCoverage = minimumCoverage,
@@ -275,10 +276,10 @@ newGetFunc <- function(getFunc, returnType){
   maximumCoverageFraction = 1.0,
   maximumSubgroups = 1000,
   maximumTime = 1000,
-  searchStrategy = .subdisc.SearchStrategy("BEAM"),
+  searchStrategy = "BEAM",
   nominalSets = FALSE,
-  numericOperatorSetting = .subdisc.NumericOperatorSetting("NORMAL"),
-  numericStrategy = .subdisc.NumericStrategy("NUMERIC_BEST"),
+  numericOperatorSetting = "NORMAL",
+  numericStrategy = "NUMERIC_BEST",
   searchStrategyWidth = 10,
   nrBins = 8,
   nrThreads = 1
@@ -286,8 +287,8 @@ newGetFunc <- function(getFunc, returnType){
   subgroupdiscovery(
     src = src,
     targetColumn = targetColumn,
-    targetType = .subdisc.TargetType("SINGLE_NUMERIC"),
-    qualityMeasure = .subdisc.QualityMeasure("EXPLAINED_VARIANCE"),
+    targetType = "SINGLE_NUMERIC",
+    qualityMeasure = "EXPLAINED_VARIANCE",
     qualityMeasureMinimum = qualityMeasureMinimum,
     searchDepth = searchDepth,
     minimumCoverage = minimumCoverage,

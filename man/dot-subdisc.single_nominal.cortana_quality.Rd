@@ -14,10 +14,10 @@
   maximumCoverageFraction = 1,
   maximumSubgroups = 1000,
   maximumTime = 1000,
-  searchStrategy = .subdisc.SearchStrategy("BEAM"),
+  searchStrategy = "BEAM",
   nominalSets = FALSE,
-  numericOperatorSetting = .subdisc.NumericOperatorSetting("NORMAL"),
-  numericStrategy = .subdisc.NumericStrategy("NUMERIC_BEST"),
+  numericOperatorSetting = "NORMAL",
+  numericStrategy = "NUMERIC_BEST",
   searchStrategyWidth = 10,
   nrBins = 8,
   nrThreads = 1
