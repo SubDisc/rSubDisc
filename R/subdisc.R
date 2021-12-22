@@ -56,7 +56,7 @@ subgroupdiscovery <- function(
 
   # Loading the data table ---
   # Only from file implemented
-  if(is.character(src)){
+  if (is.character(src)) {
     file <- .jnew("java.io.File", src)
     loader <- .jnew("nl.liacs.subdisc.DataLoaderTXT", file)
     dataTable <- J(loader, "getTable")
@@ -74,10 +74,20 @@ subgroupdiscovery <- function(
   QualityMeasure  <- .jnewEnum("nl/liacs/subdisc/QM")
 
   # Setting the target and target concept ---
-  target = .jcall(dataTable,
-                  "Lnl/liacs/subdisc/Column;",
-                  "getColumn",
-                  as.integer(targetColumn))
+  target = if (is.numeric(targetColumn) & length(targetColumn) == 1) {
+    # N.B. A float will be cast to int
+    .jcall(dataTable,
+           "Lnl/liacs/subdisc/Column;",
+           "getColumn",
+           as.integer(targetColumn))
+  } else if (is.character(targetColumn)){
+    .jcall(dataTable,
+           "Lnl/liacs/subdisc/Column;",
+           "getColumn",
+           targetColumn)
+  } else {
+    stop("targetColumn must be an integer or a string")
+  }
 
   targetConcept <- .jnew("nl.liacs.subdisc.TargetConcept")
 

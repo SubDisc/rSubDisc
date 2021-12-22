@@ -30,6 +30,7 @@ test_that("Function subgroupdiscovery - single nominal", {
   expect_equal(testdata_single_nominal, testAdult)
 })
 
+
 # Simple functions -------------------------------------------------------------
 
 test_that("Test single nominal", {
@@ -43,6 +44,7 @@ test_that("Test single nominal", {
   expect_equal(testdata_single_nominal, testAdult)
 })
 
+
 test_that("Test single numeric", {
   testdatafile = rSubDisc.file("extdata", "adult.txt")
   testAdult <- .subdisc.single_numeric.explained_variance(
@@ -51,4 +53,28 @@ test_that("Test single numeric", {
   )
 
   expect_equal(testdata_single_numeric, testAdult)
+})
+
+
+# Column target input tests ----------------------------------------------------
+
+test_that("Using column name", {
+  testdatafile = rSubDisc.file("extdata", "adult.txt")
+  testAdult <- .subdisc.single_nominal.cortana_quality(
+    src = testdatafile,
+    targetColumn = "target",
+    targetValue = "gr50K"
+  )
+
+  expect_equal(testdata_single_nominal, testAdult)
+})
+
+test_that("Wrong columnTarget type", {
+  testdatafile = rSubDisc.file("extdata", "adult.txt")
+  expect_error(.subdisc.single_nominal.cortana_quality(
+    src = testdatafile,
+    targetColumn = c(10, 10),
+    targetValue = "gr50K"
+  ), "targetColumn must be an integer or a string")
+
 })
