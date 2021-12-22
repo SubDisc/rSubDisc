@@ -39,21 +39,20 @@ subgroupdiscovery <- function(
   targetValue = NULL,
   targetType = "SINGLE_NOMINAL",
   qualityMeasure = "CORTANA_QUALITY",
-  qualityMeasureMinimum = NULL,
-  searchDepth = NULL,
-  minimumCoverage = NULL,
-  maximumCoverageFraction = NULL,
-  maximumSubgroups = NULL,
-  maximumTime = NULL,
+  qualityMeasureMinimum = 0.1,
+  searchDepth = 1,
+  minimumCoverage = 2,
+  maximumCoverageFraction = 1.0,
+  maximumSubgroups = 1000,
+  maximumTime = 1000,
   searchStrategy = "BEAM",
-  nominalSets = NULL,
+  nominalSets = FALSE,
   numericOperatorSetting = "NORMAL",
   numericStrategy = "NUMERIC_BEST",
-  searchStrategyWidth = NULL,
-  nrBins = NULL,
+  searchStrategyWidth = 10,
+  nrBins = 8,
   nrThreads = 1
 ){
-
   # Loading the data table ---
   # Only from file implemented
   if (is.character(src)) {
