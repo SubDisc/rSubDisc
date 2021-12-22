@@ -1,6 +1,8 @@
 
+SUBDISCLIB <- "subdisc-lib-2.1104.jar"
+
 .onLoad <- function(libname, pkgname){
-  jarlib = system.file("java", "subdisc-1.x.x.jar", package = pkgname)
+  jarlib = system.file("java", SUBDISCLIB, package = pkgname)
 
   if (file.exists(jarlib)){
     rJava::.jinit(jarlib)

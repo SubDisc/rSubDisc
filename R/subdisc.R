@@ -62,8 +62,7 @@ subgroupdiscovery <- function(
     dataTable <- J(loader, "getTable")
 
   } else {
-    print("Error: `src` is not valid")
-    return(NULL)
+    dataTable <- createtable(src)
   }
 
   # Java Enum ---
@@ -74,7 +73,7 @@ subgroupdiscovery <- function(
   QualityMeasure  <- .jnewEnum("nl/liacs/subdisc/QM")
 
   # Setting the target and target concept ---
-  target = if (is.numeric(targetColumn) & length(targetColumn) == 1) {
+  target <- if (is.numeric(targetColumn) & length(targetColumn) == 1) {
     # N.B. A float will be cast to int
     .jcall(dataTable,
            "Lnl/liacs/subdisc/Column;",
@@ -313,4 +312,42 @@ newGetFunc <- function(getFunc, returnType){
     nrBins = nrBins,
     nrThreads = nrThreads
   )
+}
+
+createtable <- function(data) {
+  AttributeType <- .jnewEnum("nl/liacs/subdisc/AttributeType")
+
+  nrows = dim(data)[1]
+  ncols = dim(data)[2]
+
+  types = sapply(data, typeof)
+
+  dummyfile <- .jnew("java.io.File", "from-r-datafrmae.txt")
+  table <- .jnew("nl.liacs.subdisc.Table", dummyfile, nrows, ncols)
+  columns <- J(table, "getColumns")
+
+  for (idx in 1:ncols){
+    col <- data[idx]
+    name <- gsub(".", "-", names(col), fixed=TRUE)
+
+    atttype <- switch(types[idx],
+                   "integer"   = AttributeType("NUMERIC"),
+                   "double"    = AttributeType("NUMERIC"),
+                   "character" = AttributeType("NOMINAL"),
+                   "logical"   = AttributeTYpe("BINARY"))
+
+    castfunc <- switch(types[idx],
+                   "integer"   = .jfloat,
+                   "double"    = .jfloat,
+                   "character" = as.character,
+                   "logical"   = as.logical)
+
+    if (is.null(atttype)){
+      stop("Unsupported columns type '", atttype, "' for column '", name, "'")}
+
+    column <- .jnew("nl.liacs.subdisc.Column", name, name, atttype, idx, nrows)
+    .jcall(column, "V", "setData", castfunc(data[[idx]]))
+    J(columns, "add", column)
+  }
+  table
 }

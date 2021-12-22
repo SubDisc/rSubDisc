@@ -27,7 +27,7 @@ test_that("Function subgroupdiscovery - single nominal", {
     nrThreads = 1
   )
 
-  expect_equal(testdata_single_nominal, testAdult)
+  expect_equal(testAdult, testdata_single_nominal)
 })
 
 
@@ -41,7 +41,7 @@ test_that("Test single nominal", {
     targetValue = "gr50K"
   )
 
-  expect_equal(testdata_single_nominal, testAdult)
+  expect_equal(testAdult, testdata_single_nominal)
 })
 
 
@@ -52,7 +52,7 @@ test_that("Test single numeric", {
     targetColumn = 0,
   )
 
-  expect_equal(testdata_single_numeric, testAdult)
+  expect_equal(testAdult, testdata_single_numeric)
 })
 
 
@@ -66,7 +66,7 @@ test_that("Using column name", {
     targetValue = "gr50K"
   )
 
-  expect_equal(testdata_single_nominal, testAdult)
+  expect_equal(testAdult, testdata_single_nominal)
 })
 
 test_that("Wrong columnTarget type", {
@@ -77,4 +77,31 @@ test_that("Wrong columnTarget type", {
     targetValue = "gr50K"
   ), "targetColumn must be an integer or a string")
 
+})
+
+
+# Using dataframe/tibble
+
+test_that("Using dataframe", {
+  testdatafile = rSubDisc.file("extdata", "adult.txt")
+  dataframe = read.csv(testdatafile)
+  testAdult <- .subdisc.single_nominal.cortana_quality(
+    src = dataframe,
+    targetColumn = "target",
+    targetValue = "gr50K"
+  )
+
+  expect_equal(testAdult, testdata_single_nominal)
+})
+
+test_that("Using tibble", {
+  testdatafile = rSubDisc.file("extdata", "adult.txt")
+  tibble = tibble::tibble(read.csv(testdatafile))
+  testAdult <- .subdisc.single_nominal.cortana_quality(
+    src = tibble,
+    targetColumn = "target",
+    targetValue = "gr50K"
+  )
+
+  expect_equal(testAdult, testdata_single_nominal)
 })

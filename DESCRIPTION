@@ -1,6 +1,6 @@
 Package: rSubDisc
 Title: Wrapper for the Java subgroup discovery library SubDisc
-Version: 0.0.2.1025
+Version: 0.0.3.1104
 Authors@R: person("Jeremie", "Gobeil", 
                   role = c("aut", "cre"),
                   email = "jeremie.gobeil@gmail.com", 
