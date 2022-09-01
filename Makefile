@@ -4,9 +4,11 @@
 # https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Writing-portable-packages
 PKGNAME = `sed -n "s/Package: *\([^ ]*\)/\1/p" DESCRIPTION`
 PKGVERS = `sed -n "s/Version: *\([^ ]*\)/\1/p" DESCRIPTION`
-JAVALIB = inst/java/subdisc-1.x.x.jar
-
-
+SUBDISCDIR = inst/java/SubDisc
+GITHUB = https://github.com/SubDisc/SubDisc.git
+VERSION = $(shell curl -s -I -k "https://api.github.com/repos/SubDisc/SubDisc/commits?per_page=1" | sed -n '/^[Ll]ink:/ s/.*"next".*page=\([0-9]*\).*"last".*/\1/p')
+LIBNAME = subdisc-lib-2.$(VERSION).jar
+JAVALIB = inst/java/$(LIBNAME)
 all: check
 
 build: install_deps $(JAVALIB)
@@ -28,7 +30,8 @@ clean:
 	@rm -rf inst/java/*
 
 $(JAVALIB):
-	git clone --depth 1 --branch main --single-branch https://github.com/SubDisc/SubDisc.git inst/java/SubDisc
-	cd inst/java/SubDisc && mvn package
-	cp inst/java/SubDisc/target/cortana-1.x.x.jar $(JAVALIB) 
-	rm -rf inst/java/SubDisc
+	[ -d "$(SUBDISCDIR)" ] && cd $(SUBDISCDIR) && git pull || git clone --branch main --single-branch $(GITHUB) $(SUBDISCDIR)
+	cd $(SUBDISCDIR) && mvn package -Plib
+	cp $(SUBDISCDIR)/target/$(LIBNAME) inst/java
+	sed -i "s/^SUBDISCLIB <- .*/SUBDISCLIB <- \"$(LIBNAME)\"/" R/zzz.R
+	sed -i "s/^Version: .*/Version: 0.0.3.$(VERSION)/" DESCRIPTION
