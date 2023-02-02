@@ -1,0 +1,14 @@
+Instructions for running and building this on OSX
+
+Download R from https://cran.r-project.org/bin/macosx/ (pick the right version base on your CPU)
+Install the package
+
+Install at least Java 17: https://www.oracle.com/java/technologies/downloads/#jdk17-mac
+
+Install gnu-sed in stead of sed that comes with OSX
+> brew install gnu-sed
+...
+> PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+
+Type 'make' in the root folder of the project
+> make
