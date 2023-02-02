@@ -181,7 +181,7 @@ newGetFunc <- function(getFunc, returnType){
     #RegressionModel    = .subdisc.getRegressionModel(sglist) # problem with java string
     SecondaryStatistic = .subdisc.getSecondaryStatistic(sglist),
     TertiaryStatistic  = .subdisc.getTeriaryStatistic(sglist),
-    TruePositiveRare   = .subdisc.getTruePositiveRate(sglist)
+    TruePositiveRate   = .subdisc.getTruePositiveRate(sglist)
   )
 }
 
@@ -333,7 +333,7 @@ createtable <- function(data) {
                    "integer"   = AttributeType("NUMERIC"),
                    "double"    = AttributeType("NUMERIC"),
                    "character" = AttributeType("NOMINAL"),
-                   "logical"   = AttributeTYpe("BINARY"))
+                   "logical"   = AttributeType("BINARY"))
 
     castfunc <- switch(types[idx],
                    "integer"   = .jfloat,

@@ -33,5 +33,5 @@ $(JAVALIB):
 	[ -d "$(SUBDISCDIR)" ] && cd $(SUBDISCDIR) && git pull || git clone --branch main --single-branch $(GITHUB) $(SUBDISCDIR)
 	cd $(SUBDISCDIR) && mvn package -Plib
 	cp $(SUBDISCDIR)/target/$(LIBNAME) inst/java
-	sed -i "s/^SUBDISCLIB <- .*/SUBDISCLIB <- \"$(LIBNAME)\"/" R/zzz.R
-	sed -i "s/^Version: .*/Version: 0.0.3.$(VERSION)/" DESCRIPTION
+	sed -i's/^SUBDISCLIB <- .*/SUBDISCLIB <- \"$(LIBNAME)\"/' R/zzz.R
+	sed -i's/^Version: .*/Version: 0.0.3.$(VERSION)/' DESCRIPTION
