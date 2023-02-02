@@ -30,7 +30,7 @@ subgroupdiscovery(
 
 \item{targetColumn}{The column number to use as the target}
 
-\item{nrThreads}{}
+\item{nrThreads}{The number of CPU threads SubDisc is allowed to create.}
 }
 \value{
 

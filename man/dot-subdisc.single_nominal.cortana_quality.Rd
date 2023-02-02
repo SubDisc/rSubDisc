@@ -24,7 +24,7 @@
 )
 }
 \arguments{
-\item{nrThreads}{}
+\item{nrThreads}{The number of CPU threads SubDisc is allowed to create.}
 }
 \value{
 

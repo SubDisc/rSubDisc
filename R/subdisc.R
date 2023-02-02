@@ -321,7 +321,7 @@ createtable <- function(data) {
 
   types = sapply(data, typeof)
 
-  dummyfile <- .jnew("java.io.File", "from-r-datafrmae.txt")
+  dummyfile <- .jnew("java.io.File", "from-r-dataframe.txt")
   table <- .jnew("nl.liacs.subdisc.Table", dummyfile, nrows, ncols)
   columns <- J(table, "getColumns")
 
