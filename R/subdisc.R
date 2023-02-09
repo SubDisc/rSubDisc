@@ -19,7 +19,10 @@
 #' @param searchDepth
 #' @param minimumCoverage
 #' @param maximumCoverageFraction
+#' @param minimumSupport
 #' @param maximumSubgroups
+#' @param filterSubgroups
+#' @param minimumImprovement
 #' @param maximumTime
 #' @param searchStrategy
 #' @param nominalSets
@@ -43,7 +46,10 @@ subgroupdiscovery <- function(
   searchDepth = 1,
   minimumCoverage = 2,
   maximumCoverageFraction = 1.0,
+  minimumSupport = 0,
   maximumSubgroups = 1000,
+  filterSubgroups = TRUE,
+  minimumImprovement = 0.0,
   maximumTime = 1000,
   searchStrategy = "BEAM",
   nominalSets = FALSE,
@@ -111,7 +117,10 @@ subgroupdiscovery <- function(
   setSP( "setSearchDepth"            , searchDepth            , as.integer )
   setSP( "setMinimumCoverage"        , minimumCoverage        , as.integer )
   setSP( "setMaximumCoverageFraction", maximumCoverageFraction, .jfloat    )
+  setSP( "setMinimumSupport"         , minimumSupport         , as.integer )
   setSP( "setMaximumSubgroups"       , maximumSubgroups       , as.integer )
+  setSP( "setFilterSubgroups"        , filterSubgroups                     )
+  setSP( "setMinimumImprovement"     , minimumImprovement     , .jfloat    )
   setSP( "setMaximumTime"            , maximumTime            , .jfloat    )
   setSP( "setSearchStrategy"         , SearchStrategy(searchStrategy)      )
   setSP( "setNominalSets"            , nominalSets                         )
@@ -181,7 +190,7 @@ newGetFunc <- function(getFunc, returnType){
     #RegressionModel    = .subdisc.getRegressionModel(sglist) # problem with java string
     SecondaryStatistic = .subdisc.getSecondaryStatistic(sglist),
     TertiaryStatistic  = .subdisc.getTeriaryStatistic(sglist),
-    TruePositiveRate   = .subdisc.getTruePositiveRate(sglist)
+    TruePositiveRare   = .subdisc.getTruePositiveRate(sglist)
   )
 }
 
@@ -199,7 +208,10 @@ newGetFunc <- function(getFunc, returnType){
 #' @param searchDepth
 #' @param minimumCoverage
 #' @param maximumCoverageFraction
+#' @param minimumSupport
 #' @param maximumSubgroups
+#' @param filterSubgroups
+#' @param minimumImprovement
 #' @param maximumTime
 #' @param searchStrategy
 #' @param nominalSets
@@ -221,7 +233,10 @@ newGetFunc <- function(getFunc, returnType){
   searchDepth = 1,
   minimumCoverage = 2,
   maximumCoverageFraction = 1.0,
+  minimumSupport = 0,
   maximumSubgroups = 1000,
+  filterSubgroups = TRUE,
+  minimumImprovement = 0.0,
   maximumTime = 1000,
   searchStrategy = "BEAM",
   nominalSets = FALSE,
@@ -241,7 +256,10 @@ newGetFunc <- function(getFunc, returnType){
     searchDepth = searchDepth,
     minimumCoverage = minimumCoverage,
     maximumCoverageFraction = maximumCoverageFraction,
+    minimumSupport = minimumSupport,
     maximumSubgroups = maximumSubgroups,
+    filterSubgroups = filterSubgroups,
+    minimumImprovement = minimumImprovement,
     maximumTime = maximumTime,
     searchStrategy = searchStrategy,
     nominalSets = nominalSets,
@@ -261,7 +279,10 @@ newGetFunc <- function(getFunc, returnType){
 #' @param searchDepth
 #' @param minimumCoverage
 #' @param maximumCoverageFraction
+#' @param minimumSupport
 #' @param maximumSubgroups
+#' @param filterSubgroups
+#' @param minimumImprovement
 #' @param maximumTime
 #' @param searchStrategy
 #' @param nominalSets
@@ -282,7 +303,10 @@ newGetFunc <- function(getFunc, returnType){
   searchDepth = 1,
   minimumCoverage = 2,
   maximumCoverageFraction = 1.0,
+  minimumSupport = 0,
   maximumSubgroups = 1000,
+  filterSubgroups = TRUE,
+  minimumImprovement = 0.0,
   maximumTime = 1000,
   searchStrategy = "BEAM",
   nominalSets = FALSE,
@@ -301,7 +325,10 @@ newGetFunc <- function(getFunc, returnType){
     searchDepth = searchDepth,
     minimumCoverage = minimumCoverage,
     maximumCoverageFraction = maximumCoverageFraction,
+    minimumSupport = minimumSupport,
     maximumSubgroups = maximumSubgroups,
+    filterSubgroups = filterSubgroups,
+    minimumImprovement = minimumImprovement,
     maximumTime = maximumTime,
     searchStrategy = searchStrategy,
     nominalSets = nominalSets,

@@ -14,7 +14,10 @@ subgroupdiscovery(
   searchDepth = 1,
   minimumCoverage = 2,
   maximumCoverageFraction = 1.0,
+  minimumSupport = 0,
   maximumSubgroups = 1000,
+  filterSubgroups = TRUE,
+  minimumImprovement = 0.0,
   maximumTime = 1000,
   searchStrategy = "BEAM",
   nominalSets = FALSE,
@@ -36,5 +39,5 @@ subgroupdiscovery(
 
 }
 \description{
-Search a dataset for subgroup
+Search a dataset for subgroups
 }
