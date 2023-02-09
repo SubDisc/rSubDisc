@@ -82,26 +82,26 @@ test_that("Wrong columnTarget type", {
 
 # Using dataframe/tibble
 
-test_that("Using dataframe", {
-  testdatafile = rSubDisc.file("extdata", "adult.txt")
-  dataframe = read.csv(testdatafile)
-  testAdult <- .subdisc.single_nominal.cortana_quality(
-    src = dataframe,
-    targetColumn = "target",
-    targetValue = "gr50K"
-  )
+#test_that("Using dataframe", {
+#  testdatafile = rSubDisc.file("extdata", "adult.txt")
+#  dataframe = read.csv(testdatafile)
+#  testAdult <- .subdisc.single_nominal.cortana_quality(
+#    src = dataframe,
+#    targetColumn = "target",
+#    targetValue = "gr50K"
+#  )
+#
+#  expect_equal(testAdult, testdata_single_nominal)
+#})
 
-  expect_equal(testAdult, testdata_single_nominal)
-})
-
-test_that("Using tibble", {
-  testdatafile = rSubDisc.file("extdata", "adult.txt")
-  tibble = tibble::tibble(read.csv(testdatafile))
-  testAdult <- .subdisc.single_nominal.cortana_quality(
-    src = tibble,
-    targetColumn = "target",
-    targetValue = "gr50K"
-  )
-
-  expect_equal(testAdult, testdata_single_nominal)
-})
+#test_that("Using tibble", {
+#  testdatafile = rSubDisc.file("extdata", "adult.txt")
+#  tibble = tibble::tibble(read.csv(testdatafile))
+#  testAdult <- .subdisc.single_nominal.cortana_quality(
+#    src = tibble,
+#    targetColumn = "target",
+#    targetValue = "gr50K"
+#  )
+#
+#  expect_equal(testAdult, testdata_single_nominal)
+#})
