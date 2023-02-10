@@ -1,5 +1,5 @@
 
-SUBDISCLIB <- "subdisc-lib-2.1148.jar"
+SUBDISCLIB <- "subdisc-lib-2.1149.jar"
 
 .onLoad <- function(libname, pkgname){
   jarlib = system.file("java", SUBDISCLIB, package = pkgname)

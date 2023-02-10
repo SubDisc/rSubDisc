@@ -1,6 +1,6 @@
 Package: rSubDisc
 Title: Wrapper for the Java subgroup discovery library SubDisc
-Version: 0.0.3.1136
+Version: 0.0.3.1149
 Authors@R: person("Jeremie", "Gobeil", 
                   role = c("aut", "cre"),
                   email = "jeremie.gobeil@gmail.com", 
@@ -22,4 +22,4 @@ Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Depends: 
-    R (>= 2.10)
+    R (>= 3.5.0)
