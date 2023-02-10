@@ -1,6 +1,6 @@
 Instructions for running and building this on OSX
 
-Download R from https://cran.r-project.org/bin/macosx/ (pick the right version base on your CPU)
+Download R from https://cran.r-project.org/bin/macosx/ (pick the right version based on your CPU)
 Install the package
 
 Install at least Java 17: https://www.oracle.com/java/technologies/downloads/#jdk17-mac
@@ -12,3 +12,6 @@ Install gnu-sed in stead of sed that comes with OSX
 
 Type 'make' in the root folder of the project
 > make
+
+
+When updating, make sure all references to the SubDisc revision (currently 1149) are updated also. This is relevant for DESCRIPTION and rSubDisc/R/zzz.R .
